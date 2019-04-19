@@ -9,39 +9,39 @@
 
 
   <div class="keys">
-    <div data-key="65" class="key">
+    <div data-key="65" class="key A">
       <kbd>A</kbd>
       <span class="sound">clap</span>
     </div>
-    <div data-key="83" class="key">
+    <div id="83" data-key="83" class="key S">
       <kbd>S</kbd>
       <span class="sound">hihat</span>
     </div>
-    <div data-key="68" class="key">
+    <div id="68" data-key="68" class="key D">
       <kbd>D</kbd>
       <span class="sound">kick</span>
     </div>
-    <div data-key="70" class="key">
+    <div id="70" data-key="70" class="key F">
       <kbd>F</kbd>
       <span class="sound">openhat</span>
     </div>
-    <div data-key="71" class="key">
+    <div id="71" data-key="71" class="key G">
       <kbd>G</kbd>
       <span class="sound">boom</span>
     </div>
-    <div data-key="72" class="key">
+    <div id="72" data-key="72" class="key H">
       <kbd>H</kbd>
       <span class="sound">ride</span>
     </div>
-    <div data-key="74" class="key">
+    <div id="74" data-key="74" class="key J">
       <kbd>J</kbd>
       <span class="sound">snare</span>
     </div>
-    <div data-key="75" class="key">
+    <div id="75" data-key="75" class="key K">
       <kbd>K</kbd>
       <span class="sound">tom</span>
     </div>
-    <div data-key="76" class="key">
+    <div id="76" data-key="76" class="key L">
       <kbd>L</kbd>
       <span class="sound">tink</span>
     </div>
@@ -58,6 +58,24 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+
+document.onkeydown = function(e) {
+  const keyPressed = document.querySelector(`.${String.fromCharCode(e.keyCode)}`);
+  keyPressed.className += " playing";
+
+  const audiofiles = document.querySelectorAll('audio');
+  for (i=0; i<audiofiles.length; i++) {
+    if (parseInt(audiofiles[i].dataset.key, 10) === e.keyCode) {
+      const audio = new Audio(audiofiles[i].src);
+      audio.play();
+    }
+  }
+}
+
+document.onkeyup = function (e) {
+  const keyPressed = document.querySelector(`.${String.fromCharCode(e.keyCode)}`);
+  keyPressed.classList.remove("playing");
+}
 
 </script>
 
